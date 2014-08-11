@@ -1,0 +1,7 @@
+---
+php_main_packages: 
+- php
+- php-mysql
+
+php_custom_packages:
+- php-mbstring 

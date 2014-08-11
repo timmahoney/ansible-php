@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+
+{% for section in php_apache_conf recursive %}
+{% set outer_loop = loop %}
+  {% if section.TagName is defined and section.TagAttribute is defined %} 
+  <{{ section.TagName }} {{ section.TagAttribute }}>
+  {% endif %}
+  {% for k,v in section.iteritems() if k != "TagName" and k != "TagAttribute" %}
+  {% if k == "Tags" %}
+      {{ outer_loop(v) }}
+  {% else %}
+    {% if v is string %}
+      {{ k }} {{ v }}
+    {% else %}
+      {% for list_item in v %}
+        {{ k }} {{ list_item }}
+      {% endfor %}
+    {% endif %}
+    
+  {% endif %}  
+  {% endfor %}
+  {% if section.TagName is defined and section.TagAttribute is defined %} 
+  </{{ section.TagName }}>
+  {% endif %}
+{% endfor %}

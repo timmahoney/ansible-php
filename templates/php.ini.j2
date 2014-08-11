@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+
+{% for section in php_ini recursive %}
+{% set outer_loop = loop %}
+  {% if section.section_name is defined %}
+[{{ section.section_name }}]
+  {% endif %}
+  {% for k,v in section.iteritems() if k != "section_name" %}
+  {% if k == "Tags" %}
+      {{ outer_loop(v) }}
+  {% else %}
+  {{ k }}={{ v }}
+  {% endif %}
+  {% endfor %}
+{% endfor %}

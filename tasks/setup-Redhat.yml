@@ -1,0 +1,11 @@
+---
+- name: "[INSTALL] Redhat Main Packages"
+  sudo: yes
+  yum: "name={{ item }} state=present"
+  with_items: php_main_packages
+
+
+- name: "[INSTALL] Redhat Custom Packages"
+  sudo: yes
+  yum: "name={{ item }} state=present"
+  with_items: php_custom_packages
