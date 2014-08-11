@@ -20,7 +20,7 @@
 
 - name: "[GENERATE] Apache php.conf"
   sudo: yes
-  template: src=php.ini.j2 dest=/etc/php.ini owner=root group=root mode=644
+  template: src=php_apache.conf.j2 dest=/etc/httpd/conf.d/php.conf owner=root group=root mode=644
   tags:
   - php
 
